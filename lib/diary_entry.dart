@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:moofli_fullstack/utils/appbar.dart';
 import 'sidebar.dart';
+
 class DiaryEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Sidebar(),
       appBar: Appbar(),
       body: SingleChildScrollView(
         child: Padding(

@@ -31,31 +31,28 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Appbar(),
+      appBar: AppBar(
+        title: Text('Settings'),
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-             leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 0, 0)),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-              title: Text('Settings', style: TextStyle(fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(height: 10),
-            
-            ListTile(
-              title: Text('Edit Account Information', style: TextStyle(fontWeight: FontWeight.bold)),
+              title: Text('Edit Account Information',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 // Handle edit account information tap
               },
             ),
             Divider(),
+            Spacer(),
             ListTile(
               leading: Icon(Icons.logout, color: Colors.red),
-              title: Text('Log Out', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+              title: Text('Log Out',
+                  style: TextStyle(
+                      color: Colors.red, fontWeight: FontWeight.bold)),
               onTap: () {
                 // Handle logout tap
               },

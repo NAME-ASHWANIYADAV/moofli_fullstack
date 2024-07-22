@@ -1,22 +1,11 @@
 import 'package:flutter/material.dart';
-
-
-
-
+import 'package:moofli_fullstack/utils/appbar.dart';
+import 'sidebar.dart';
 class DiaryEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:const Row(
-          children: [
-            Text('Moofli'),
-            Spacer(),
-                Icon(Icons.local_fire_department),
-                Text('3'),
-          ],
-        ),
-      ),
+      appBar: Appbar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -31,88 +20,101 @@ class DiaryEntry extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '16 JULY',
-                        style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            '16 ',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Text(
+                            'JULY',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text('2024, Sunday'),
+                      Text(
+                        '2024, Sunday',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                     ],
                   ),
-                  
                 ],
               ),
-              SizedBox(height: 20),
-              Container(
-                
-                width: double.infinity,
-                height: 800,
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade300,
-                  borderRadius: BorderRadius.circular(10),
+              const SizedBox(height: 25),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: 800,
                 ),
-                child: Text(
-                  'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident nihil beatae pariatur fuga suscipit perferendis unde commodi amet vitae asperiores?',
-                  style: TextStyle(
-                    color: Colors.indigo.shade900,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w700,
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF4E6CD7),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextField(
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'What\'s on your mind?',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ),
               ),
-              
-              
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        onTap: (index){},
-                fixedColor: Colors.black,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.photo_size_select_actual_outlined),
-                    label: '',
-                    
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.format_bold),
-                    label: '',
-                    backgroundColor: Colors.black
-                    
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.format_italic),
-                    label: '',
-                    
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.format_underline),
-                    label: '',
-                    
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.format_align_left),
-                    label: '',
-                    
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.format_align_center),
-                    label: '',
-                    
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.format_align_right),
-                    label: '',
-                    
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.format_align_justify),
-                    label: '',
-                  ),
-                ],
-              ),
+        onTap: (index) {},
+        fixedColor: Colors.black,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.photo_size_select_actual_outlined),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.format_bold),
+              label: '',
+              backgroundColor: Colors.black),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_italic),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_underline),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_align_left),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_align_center),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_align_right),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_align_justify),
+            label: '',
+          ),
+        ],
+      ),
     );
   }
 }

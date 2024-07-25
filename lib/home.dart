@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/diary_entry.dart';
+import 'package:moofli_fullstack/sidebar.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:moofli_fullstack/utils/appbar.dart';
 
 class home_page extends StatefulWidget {
   const home_page({super.key});
@@ -12,6 +16,9 @@ class _home_pageState extends State<home_page> {
   late DateTime _focusedDay;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   bool _isCalendarVisible = true;
+
+
+
 
   final List<Post> posts = [
     Post(
@@ -65,36 +72,13 @@ class _home_pageState extends State<home_page> {
     posts.sort((a, b) => b.date.compareTo(a.date));
 
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(
-                  'images/croc2.jpeg'), // Change this to your profile image
-              radius: 18,
-            ),
-            Row(
-              children: [
-                Image.asset('images/moofli_logo.jpg',
-                    height: 24), // Change this to your logo
-                SizedBox(width: 8),
-                Text('MOOFLI'),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(Icons.local_fire_department),
-                SizedBox(width: 4),
-                Text('3'),
-              ],
-            ),
-          ],
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
+      drawer: Sidebar(),
+      appBar: Appbar(),
+      
+
+        
+           
+       
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -103,7 +87,7 @@ class _home_pageState extends State<home_page> {
               const SizedBox(height: 16.0),
               AnimatedContainer(
                 duration: Duration(milliseconds: 300),
-                height: _isCalendarVisible ? 330 : 100,
+                height: _isCalendarVisible ? 330 : 125,
                 child: SingleChildScrollView(
                   child: TableCalendar(
                     headerStyle: HeaderStyle(
@@ -131,7 +115,7 @@ class _home_pageState extends State<home_page> {
                     onPageChanged: (focusedDay) {
                       _updateFocusedDay(focusedDay);
                     },
-                    calendarStyle: CalendarStyle(
+                    calendarStyle: const CalendarStyle(
                       todayDecoration: BoxDecoration(
                         color: Colors.blue,
                         shape: BoxShape.circle,
@@ -208,17 +192,20 @@ class _home_pageState extends State<home_page> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 6.0,
+        // padding: EdgeInsets.symmetric(horizontal: 20.0), 
         child: Container(
           height: 60.0,
           color: Colors.white,
-          padding: EdgeInsets.only(left: 20, right: 20), // Add some padding
+          // padding: EdgeInsets.only(left: 20, right: 20), // Add some padding
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               IconButton(
+                padding: EdgeInsets.only(left: 35),
                 icon: Icon(
                   Icons.home,
                   color: _selectedIndex == 0 ? Colors.black : Colors.grey,
+                  size: 30.0, 
                 ),
                 onPressed: () {
                   _onItemTapped(0);
@@ -228,13 +215,18 @@ class _home_pageState extends State<home_page> {
               SizedBox(width: 40), // Space for the floating action button
 
               IconButton(
+                padding: EdgeInsets.only(right: 35),
                 icon: CircleAvatar(
-                  radius: 15, // Adjust the radius to fit your design
+                  radius: 20,
+                   // Adjust the radius to fit your design
                   backgroundImage: AssetImage(
                       'images/croc2.jpeg'), // Path to your profile image
+                     
                 ),
+                
                 onPressed: () {
-                  _onItemTapped(3);
+                   Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => DiaryEntry()));
                 },
               ),
             ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moofli_fullstack/diary_entry.dart';
-import 'package:moofli_fullstack/settings.dart';
-import 'package:moofli_fullstack/sidebar.dart';
+
+ import 'package:moofli_fullstack/home.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 255, 255)),
         useMaterial3: true,
       ),
-      home: DiaryEntry(),
+      home: home_page(),
     );
   }
 }

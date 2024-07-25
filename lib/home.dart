@@ -225,8 +225,7 @@ class _home_pageState extends State<home_page> {
                 ),
                 
                 onPressed: () {
-                   Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => DiaryEntry()));
+                   
                 },
               ),
             ],
@@ -239,6 +238,8 @@ class _home_pageState extends State<home_page> {
           alignment: Alignment.bottomRight,
           child: FloatingActionButton(
             onPressed: () {
+              Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => DiaryEntry()));
               // Handle action here
             },
             shape: RoundedRectangleBorder(

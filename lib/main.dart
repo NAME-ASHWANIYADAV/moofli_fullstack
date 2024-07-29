@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
  import 'package:moofli_fullstack/home.dart';
+import 'package:moofli_fullstack/landingpg.dart';
+import 'package:moofli_fullstack/login-signup%20pages/loginpg.dart';
+import 'package:moofli_fullstack/login-signup%20pages/signuppg1.dart';
+import 'package:moofli_fullstack/profile.dart';
+import 'package:moofli_fullstack/settings.dart';
 
 
 void main() {
@@ -17,10 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Moofli',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 255, 255)),
+        colorScheme: ColorScheme.light(),
         useMaterial3: true,
       ),
-      home: home_page(),
+      home: landingPage(),
     );
   }
 }

@@ -1,8 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/sidebar.dart';
 import 'package:moofli_fullstack/utils/appbar.dart';
-import 'sidebar.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class DiaryEntry extends StatelessWidget {
+
+
+class Diaryentry extends StatefulWidget {
+  @override
+  _DiaryentryState createState() => _DiaryentryState();
+}
+
+class _DiaryentryState extends State<Diaryentry> with WidgetsBindingObserver {
+
+
+
+
+  
+ TextEditingController _contentController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      _saveDiaryEntry();
+    }
+  }
+
+  void _saveDiaryEntry() async {
+    String content = _contentController.text.trim();
+
+    if (content.isNotEmpty) {
+      var url = Uri.parse('http://localhost:2024/api/diary/entries');
+      var response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEwYTc3MmI5MzZmNmM1ZDFmYzA3YzQiLCJpYXQiOjE3MjE4MDQ2NTksImV4cCI6MTcyMjQwOTQ1OX0.7tCsTXOSkXu9nci3dWPJWWHb2Ul05GK6n9DEPJKU_QE',
+        },
+        body: jsonEncode({'content': content}),
+        
+      );
+
+      if (response.statusCode == 200) {
+        var responseBody = jsonDecode(response.body);
+        if (responseBody['result'] == true) {
+          // Diary entry submitted successfully
+          print('Diary entry submitted: $content');
+
+          // Optionally, show a success message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Diary entry saved successfully!')),
+          );
+        } else {
+          // Show an error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to save diary entry.')),
+          );
+        }
+      } else {
+        // Show an error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to save diary entry.')),
+        );
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,37 +124,41 @@ class DiaryEntry extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 25),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: 800,
-                ),
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF4E6CD7),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextField(
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'What\'s on your mind?',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
+               
+                 ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: 800,
+          ),
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Color(0xFF4E6CD7),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              controller: _contentController,
+              maxLines: null,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'What\'s on your mind?',
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 20,
                 ),
               ),
-            ],
+            ),
           ),
         ),
+            ],
+          ),
+            
+        ),
       ),
+      
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        onTap: (index) {},
+       
         fixedColor: Colors.black,
         items: const [
           BottomNavigationBarItem(

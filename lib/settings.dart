@@ -46,18 +46,18 @@ class SettingsPage extends StatelessWidget {
                 // Handle edit account information tap
               },
             ),
-            Divider(),
-            Spacer(),
-            ListTile(
-              leading: Icon(Icons.logout, color: Colors.red),
-              title: Text('Log Out',
-                  style: TextStyle(
-                      color: Colors.red, fontWeight: FontWeight.bold)),
-              onTap: () {
-                // Handle logout tap
-              },
-            ),
-            Divider(),
+            // Divider(),
+            // Spacer(),
+            // ListTile(
+            //   leading: Icon(Icons.logout, color: Colors.red),
+            //   title: Text('Log Out',
+            //       style: TextStyle(
+            //           color: Colors.red, fontWeight: FontWeight.bold)),
+            //   onTap: () {
+            //     // Handle logout tap
+            //   },
+            // ),
+            // Divider(),
           ],
         ),
       ),

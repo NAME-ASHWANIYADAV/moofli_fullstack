@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moofli_fullstack/sidebar.dart';
+import 'package:moofli_fullstack/utils/sidebar.dart';
 import 'package:moofli_fullstack/utils/appbar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -42,7 +42,7 @@ class _DiaryentryState extends State<Diaryentry> with WidgetsBindingObserver {
     String content = _contentController.text.trim();
 
     if (content.isNotEmpty) {
-      var url = Uri.parse('http://localhost:2024/api/diary/entries');
+      var url = Uri.parse('http://10.0.2.2:2024/api/diary/entries');
       var response = await http.post(
         url,
         headers: {

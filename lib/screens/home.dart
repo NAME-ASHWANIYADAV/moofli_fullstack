@@ -2,17 +2,22 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:moofli_fullstack/diary_entry.dart';
-import 'package:moofli_fullstack/sidebar.dart';
+import 'package:moofli_fullstack/constants/global_variables.dart';
+import 'package:moofli_fullstack/screens/diary_entry.dart';
+import 'package:moofli_fullstack/provider_class/userprovider.dart';
+import 'package:moofli_fullstack/utils/sidebar.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:moofli_fullstack/utils/appbar.dart';
 
 class home_page extends StatefulWidget {
+  static const String routeName = '/home';
   const home_page({super.key});
 
   @override
   State<home_page> createState() => _home_pageState();
 }
+
 
 class _home_pageState extends State<home_page> {
   late DateTime _selectedDay;
@@ -20,51 +25,52 @@ class _home_pageState extends State<home_page> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   bool _isCalendarVisible = true;
 
-
-List<Post> posts = [];
+  List<Post> posts = [];
   int postCount = 0;
   bool newPost = false;
-
-
 
   @override
   void initState() {
     super.initState();
-    _fetchPosts();
-     _selectedDay = DateTime.now();
+    _selectedDay = DateTime.now();
     _focusedDay = DateTime.now();
+    _fetchPosts();
   }
 
+  Future<void> _fetchPosts() async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final user = userProvider.user;
 
+    // if (user == null) {
+    //   print('User is not logged in');
+      // return;
+    // }
 
-
-
- Future<void> _fetchPosts() async {
-  var userId = '66a0a772b936f6c5d1fc07c4'; // Replace with actual user ID
-  var url = Uri.parse('http://10.0.2.2:2024/api/diary/entries/user/$userId');
-  try {
-    var response = await http.get(url, headers: {
-      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTYwODE3MWRlZjZlZjcwMjhiODYiLCJpYXQiOjE3MjIzNDQ5NjgsImV4cCI6MTcyMjk0OTc2OH0.FnMDIM_90OlnQwvBdgsN1svZtX76FvVjq3rPAX4UCiw', // Replace with actual token
-    });
-
-    if (response.statusCode == 200) {
-      List<dynamic> responseBody = jsonDecode(response.body);
-      setState(() {
-        posts = responseBody.map((data) => Post.fromJson(data)).toList();
-        postCount = posts.length;
-        newPost = posts.isNotEmpty;
+    final url =
+        Uri.parse('$uri/diary/entries/user/${user.id}');
+    try {
+      final response = await http.get(url, headers: {
+        'Authorization': 'Bearer ${user.token}',
       });
-    } else {
-      print('Failed to fetch diary entries. Status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final List<dynamic> responseBody = jsonDecode(response.body);
+        if (mounted) {
+          setState(() {
+            posts = responseBody.map((data) => Post.fromJson(data)).toList();
+            postCount = posts.length;
+            newPost = posts.isNotEmpty;
+          });
+        }
+      } else {
+        print(
+            'Failed to fetch diary entries. Status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+    } catch (e) {
+      print('Exception occurred: $e');
     }
-  } catch (e) {
-    print('Exception occurred: $e');
   }
-
-}
-
- 
 
   void _updateSelectedDay(DateTime selectedDay, DateTime focusedDay) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -74,7 +80,6 @@ List<Post> posts = [];
       });
     });
   }
-  
 
   void _updateFocusedDay(DateTime focusedDay) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -84,12 +89,10 @@ List<Post> posts = [];
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     // Sort posts by date in descending order
-    //  posts.sort((a, b) => b.date.compareTo(a.date));
+    posts.sort((a, b) => b.date.compareTo(a.date));
 
     return Scaffold(
       drawer: Sidebar(),
@@ -235,8 +238,7 @@ List<Post> posts = [];
                 ),
               ),
               SizedBox(height: 15),
-              
-                 PostList(posts: posts),
+              PostList(posts: posts),
               // Integrate PostList widget
             ],
           ),
@@ -315,8 +317,6 @@ List<Post> posts = [];
   }
 }
 
-
-// Define PostList widget to display posts
 class PostList extends StatelessWidget {
   final List<Post> posts;
 

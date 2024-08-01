@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../sidebar.dart';
+import 'sidebar.dart';
 
 class Appbar extends StatelessWidget implements PreferredSizeWidget {
   const Appbar({super.key});

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page1.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page2.dart';
 
  import 'package:moofli_fullstack/home.dart';
 import 'package:moofli_fullstack/landingpg.dart';
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(),
         useMaterial3: true,
       ),
-      home: landingPage(),
+      home: ProfileCompletionScreen(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/login-signup%20pages/loginpg.dart';
 
 
 class landingPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _landingPageState extends State<landingPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Center(
-          child: SafeArea(
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -129,11 +130,11 @@ class _landingPageState extends State<landingPage> {
                             ),
 
                             onPressed: () {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => LoginPage()),
-                            //   );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen()),
+                              );
                             },
 
                             child: Padding(
@@ -184,8 +185,8 @@ class _landingPageState extends State<landingPage> {
                       textStyle: TextStyle(color: Colors.black),
                     )),
                     onPressed: () {
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => LoginPage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginScreen()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(

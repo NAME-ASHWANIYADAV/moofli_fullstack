@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moofli_fullstack/settings.dart';
+import 'package:moofli_fullstack/screens/settings.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key});

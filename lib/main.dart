@@ -6,6 +6,7 @@ import 'package:moofli_fullstack/screens/home.dart';
 // import 'package:moofli_fullstack/screens/landingpg.dart';
 import 'package:moofli_fullstack/provider_class/userprovider.dart';
 import 'package:moofli_fullstack/router.dart';
+import 'package:moofli_fullstack/screens/landingpg.dart';
 import 'package:moofli_fullstack/services/auth_service.dart';
 // import 'package:moofli_fullstack/login-signup%20pages/loginpg.dart';
 // import 'package:moofli_fullstack/login-signup%20pages/signuppg1.dart';
@@ -40,13 +41,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(),
         useMaterial3: true,
       ),
-      // home: landingPage(),
-          onGenerateRoute: (settings) => generateRoute(settings),
-       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? Provider.of<UserProvider>(context).user.type == 'user'
-              ?  Diaryentry()
-              :  home_page()
-          : const LoginScreen(),
+        // home: home_page(),
+         onGenerateRoute: (settings) => generateRoute(settings),
+      home: Consumer<UserProvider>(
+        builder: (context, userProvider, _) {
+          if (userProvider.user.token.isNotEmpty) {
+            if (userProvider.user.type == 'user') {
+              return  Diaryentry(); // Ensure DiaryEntry uses Scaffold
+            } else {
+              return const home_page(); // Ensure HomePage uses Scaffold
+            }
+          } else {
+            return const landingPage(); // Ensure LandingPage uses Scaffold
+          }
+        },
+      ),
     );
   }
 }

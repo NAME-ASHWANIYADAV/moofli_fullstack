@@ -15,7 +15,11 @@ class UserProvider extends ChangeNotifier {
     // cart: [],
   );
 
+  
+ List<Post> _diaryEntries = [];
+
   User get user => _user;
+  List<Post> get diaryEntries => _diaryEntries;
 
   void setUser(String user) {
     _user = User.fromJson(user);
@@ -26,4 +30,14 @@ class UserProvider extends ChangeNotifier {
     _user = user;
     notifyListeners();
   }
+
+  void setDiaryEntries(List<Post> entries) {
+    _diaryEntries = entries;
+    notifyListeners();
+  }
 }
+
+
+  
+
+ 

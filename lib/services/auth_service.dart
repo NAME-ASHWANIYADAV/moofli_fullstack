@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:moofli_fullstack/constants/error_handling.dart';
@@ -12,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:moofli_fullstack/models/user.dart';
 class AuthService {
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
   void signInUser({
     required BuildContext context,
     required String email,
@@ -28,7 +30,7 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      print(res.body);
+      // print(res.body);
       httpErrorHandle(
         response: res,
         context: context,
@@ -49,45 +51,45 @@ class AuthService {
   }
 
   // get user data
-  void getUserData(
-    BuildContext context,
-  ) async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('x-auth-token');
+  // void getUserData(
+  //   BuildContext context,
+  // ) async {
+  //   try {
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     String? token = prefs.getString('x-auth-token');
 
-      if (token == null) {
-        prefs.setString('x-auth-token', '');
-      }
+  //     if (token == null) {
+  //       prefs.setString('x-auth-token', '');
+  //     }
 
-      var tokenRes = await http.post(
-        Uri.parse('$uri/tokenIsValid'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': token!
-        },
-      );
+  //     var tokenRes = await http.post(
+  //       Uri.parse('$uri/user-tokenIsValid/'),
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //         'x-auth-token': token!
+  //       },
+  //     );
 
-      var response = jsonDecode(tokenRes.body);
+  //     var response = jsonDecode(tokenRes.body);
 
-      if (response == true) {
-        http.Response userRes = await http.get(
-          Uri.parse('$uri/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'x-auth-token': token
-          },
-        );
+  //     if (response == true) {
+  //       http.Response userRes = await http.get(
+  //         Uri.parse('$uri/'),
+  //         headers: <String, String>{
+  //           'Content-Type': 'application/json; charset=UTF-8',
+  //           'x-auth-token': token
+  //         },
+  //       );
 
-        var userProvider = Provider.of<UserProvider>(context, listen: false);
-        userProvider.setUser(userRes.body);
-      }
-    } catch (e) {
-      showErrorMessage(context, message: e.toString());
-    }
-  }
+  //       var userProvider = Provider.of<UserProvider>(context, listen: false);
+  //       userProvider.setUser(userRes.body);
+  //     }
+  //   } catch (e) {
+  //     showErrorMessage(context, message: e.toString());
+  //   }
+  // }
 
-  Future<void> fetchDiaryEntries(BuildContext context) async {
+   Future<void> fetchDiaryEntries(BuildContext context) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page1.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page3.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page4.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page5.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page6.dart';
 import 'package:moofli_fullstack/login-signup%20pages/loginpg.dart';
 import 'package:moofli_fullstack/screens/diary_entry.dart';
 import 'package:moofli_fullstack/constants/global_variables.dart';
@@ -40,7 +45,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(),
         useMaterial3: true,
       ),
-      // home: landingPage(),
+      // home: ProfileCompletionScreen6(),
           onGenerateRoute: (settings) => generateRoute(settings),
        home: Provider.of<UserProvider>(context).user.token.isNotEmpty
           ? Provider.of<UserProvider>(context).user.type == 'user'

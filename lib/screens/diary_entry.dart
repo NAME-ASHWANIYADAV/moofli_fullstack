@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/constants/global_variables.dart';
+import 'package:moofli_fullstack/provider_class/userprovider.dart';
 import 'package:moofli_fullstack/utils/sidebar.dart';
-import 'package:moofli_fullstack/utils/appbar.dart';
+// import 'package:moofli_fullstack/utils/appbar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:provider/provider.dart';
 
 
 
@@ -39,15 +43,18 @@ class _DiaryentryState extends State<Diaryentry> with WidgetsBindingObserver {
   }
 
   void _saveDiaryEntry() async {
+     final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final user = userProvider.user;
+
     String content = _contentController.text.trim();
 
     if (content.isNotEmpty) {
-      var url = Uri.parse('http://10.0.2.2:2024/api/diary/entries');
+      var url = Uri.parse('$uri/diary/entries');
       var response = await http.post(
         url,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEwYTc3MmI5MzZmNmM1ZDFmYzA3YzQiLCJpYXQiOjE3MjE4MDQ2NTksImV4cCI6MTcyMjQwOTQ1OX0.7tCsTXOSkXu9nci3dWPJWWHb2Ul05GK6n9DEPJKU_QE',
+          'Authorization': 'Bearer ${user.token}',
         },
         body: jsonEncode({'content': content}),
         
@@ -81,7 +88,43 @@ class _DiaryentryState extends State<Diaryentry> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Sidebar(),
-      appBar: Appbar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: CircleAvatar(
+                radius: 15, // Adjust the radius to fit your design
+                backgroundImage: AssetImage(
+                    'images/croc2.jpeg'), // Path to your profile image
+              ),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+            Row(
+              children: [
+                Image.asset('images/moofli_logo.jpg',
+                    height: 24), // Change this to your logo
+                SizedBox(width: 8),
+                Text('MOOFLI'),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.local_fire_department,
+                  // color: newPost ? Colors.red : Colors.black,
+                ),
+                SizedBox(width: 4),
+                Text('0'),
+              ],
+            ),
+          ],
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

@@ -76,4 +76,29 @@ class User {
       // cart: cart ?? this.cart,
     );
   }
+
+
+  
 }
+
+// models/post.dart
+class Post {
+  final DateTime date;
+  final String content;
+
+  Post({required this.date, required this.content});
+
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      date: DateTime.parse(json['__created']),
+      content: json['content'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'date': date.toIso8601String(),
+    'content': content,
+  };
+}
+
+

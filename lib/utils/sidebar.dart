@@ -48,6 +48,7 @@ class Sidebar extends StatelessWidget {
               title:
                   Text('Logout Account', style: TextStyle(color: Colors.red)),
               onTap: () {
+                
                 // Handle Logout tap
               },
             ),

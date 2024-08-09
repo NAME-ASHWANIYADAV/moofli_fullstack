@@ -1,14 +1,16 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:moofli_fullstack/constants/global_variables.dart';
+import 'package:moofli_fullstack/models/user.dart';
+// import 'package:moofli_fullstack/constants/global_variables.dart';
 import 'package:moofli_fullstack/screens/diary_entry.dart';
 import 'package:moofli_fullstack/provider_class/userprovider.dart';
+import 'package:moofli_fullstack/services/auth_service.dart';
 import 'package:moofli_fullstack/utils/sidebar.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:moofli_fullstack/utils/appbar.dart';
+
 
 class home_page extends StatefulWidget {
   static const String routeName = '/home';
@@ -25,9 +27,9 @@ class _home_pageState extends State<home_page> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   bool _isCalendarVisible = true;
 
-  List<Post> posts = [];
-  int postCount = 0;
-  bool newPost = false;
+  // List<Post> posts = [];
+  // int postCount = 0;
+  // bool newPost = false;
 
   @override
   void initState() {
@@ -37,40 +39,40 @@ class _home_pageState extends State<home_page> {
     _fetchPosts();
   }
 
-  Future<void> _fetchPosts() async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final user = userProvider.user;
+  // Future<void> _fetchPosts() async {
+  //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+  //   final user = userProvider.user;
 
-    // if (user == null) {
-    //   print('User is not logged in');
-      // return;
-    // }
+  //   // if (user == null) {
+  //   //   print('User is not logged in');
+  //   //   return;
+  //   // }
 
-    final url =
-        Uri.parse('$uri/diary/entries/user/${user.id}');
-    try {
-      final response = await http.get(url, headers: {
-        'Authorization': 'Bearer ${user.token}',
-      });
+  //   final url =
+  //       Uri.parse('$uri/diary/entries/user/${user.id}');
+  //   try {
+  //     final response = await http.get(url, headers: {
+  //       'Authorization': 'Bearer ${user.token}',
+  //     });
 
-      if (response.statusCode == 200) {
-        final List<dynamic> responseBody = jsonDecode(response.body);
-        if (mounted) {
-          setState(() {
-            posts = responseBody.map((data) => Post.fromJson(data)).toList();
-            postCount = posts.length;
-            newPost = posts.isNotEmpty;
-          });
-        }
-      } else {
-        print(
-            'Failed to fetch diary entries. Status code: ${response.statusCode}');
-        print('Response body: ${response.body}');
-      }
-    } catch (e) {
-      print('Exception occurred: $e');
-    }
-  }
+  //     if (response.statusCode == 200) {
+  //       final List<dynamic> responseBody = jsonDecode(response.body);
+  //       if (mounted) {
+  //         setState(() {
+  //           posts = responseBody.map((data) => Post.fromJson(data)).toList();
+  //           postCount = posts.length;
+  //           newPost = posts.isNotEmpty;
+  //         });
+  //       }
+  //     } else {
+  //       print(
+  //           'Failed to fetch diary entries. Status code: ${response.statusCode}');
+  //       print('Response body: ${response.body}');
+  //     }
+  //   } catch (e) {
+  //     print('Exception occurred: $e');
+  //   }
+  // }
 
   void _updateSelectedDay(DateTime selectedDay, DateTime focusedDay) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -79,6 +81,9 @@ class _home_pageState extends State<home_page> {
         _focusedDay = focusedDay;
       });
     });
+  }
+   void _fetchPosts() async {
+    await AuthService().fetchDiaryEntries(context);
   }
 
   void _updateFocusedDay(DateTime focusedDay) {
@@ -92,23 +97,36 @@ class _home_pageState extends State<home_page> {
   @override
   Widget build(BuildContext context) {
     // Sort posts by date in descending order
+     List<Post> posts = Provider.of<UserProvider>(context).diaryEntries;
     posts.sort((a, b) => b.date.compareTo(a.date));
+    int postCount = posts.length;
 
     return Scaffold(
-      drawer: Sidebar(),
+       drawer: Sidebar(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        leading: Builder(
+            builder: (context) {
+              return IconButton(
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  icon: Icon(
+                    Icons.circle,
+                    size: 40,
+                  ));
+            },
+          ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: CircleAvatar(
-                radius: 15, // Adjust the radius to fit your design
-                backgroundImage: AssetImage(
-                    'images/croc2.jpeg'), // Path to your profile image
-              ),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
+            // IconButton(
+              // icon: CircleAvatar(
+              //   radius: 15, // Adjust the radius to fit your design
+              //   backgroundImage: AssetImage(
+              //       'images/croc2.jpeg'), // Path to your profile image
+              // ),
+            //   onPressed: () => Scaffold.of(context).openDrawer(),
+            // ),
+            SizedBox(width: 20),
             Row(
               children: [
                 Image.asset('images/moofli_logo.jpg',
@@ -121,10 +139,10 @@ class _home_pageState extends State<home_page> {
               children: [
                 Icon(
                   Icons.local_fire_department,
-                  color: newPost ? Colors.red : Colors.black,
+                  // color: newPost ? Colors.red : Colors.black,
                 ),
                 SizedBox(width: 4),
-                Text('$postCount'),
+                 Text('$postCount'),
               ],
             ),
           ],
@@ -340,19 +358,7 @@ class PostList extends StatelessWidget {
   }
 }
 
-class Post {
-  final DateTime date;
-  final String content;
 
-  Post({required this.date, required this.content});
-
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      date: DateTime.parse(json['__created']),
-      content: json['content'],
-    );
-  }
-}
 
 class PostCard extends StatelessWidget {
   final Post post;

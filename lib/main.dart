@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page1.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page3.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page4.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page5.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page6.dart';
 import 'package:moofli_fullstack/login-signup%20pages/loginpg.dart';
 import 'package:moofli_fullstack/screens/diary_entry.dart';
 import 'package:moofli_fullstack/constants/global_variables.dart';
@@ -19,7 +24,7 @@ void main() {
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
     ),
-  ], child:  MyApp()));
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -41,13 +46,18 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(),
         useMaterial3: true,
       ),
-        // home: home_page(),
-         onGenerateRoute: (settings) => generateRoute(settings),
+      // home: home_page(),
+      onGenerateRoute: (settings) => generateRoute(settings),
       home: Consumer<UserProvider>(
         builder: (context, userProvider, _) {
           if (userProvider.user.token.isNotEmpty) {
+<<<<<<< HEAD
             if (userProvider.user.token == '') {
               return  Diaryentry(); // Ensure DiaryEntry uses Scaffold
+=======
+            if (userProvider.user.type == 'user') {
+              return Diaryentry(); // Ensure DiaryEntry uses Scaffold
+>>>>>>> ab14866567c63422af1a62e491981b3296fc4847
             } else {
               return const home_page(); // Ensure HomePage uses Scaffold
             }

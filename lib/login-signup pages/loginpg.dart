@@ -1,8 +1,8 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:moofli_fullstack/screens/home.dart';
-import 'package:http/http.dart' as http;
+// import 'package:moofli_fullstack/screens/home.dart';
+// import 'package:http/http.dart' as http;
 import 'package:moofli_fullstack/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -160,10 +160,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       EdgeInsets.symmetric(vertical: 15.0, horizontal: 120.0),
                 ),
                 child: ShaderMask(
-                  shaderCallback: (bounds) => LinearGradient(
+                  shaderCallback: (bounds) => const LinearGradient(
                     colors: [Colors.red, Colors.green, Colors.blue],
                   ).createShader(bounds),
-                  child: Text(
+                  child: const Text(
                     'Log In',
                     style: TextStyle(
                       color: Colors.white,

@@ -6,7 +6,7 @@ import 'package:moofli_fullstack/models/user.dart';
 // import 'package:moofli_fullstack/constants/global_variables.dart';
 import 'package:moofli_fullstack/screens/diary_entry.dart';
 import 'package:moofli_fullstack/provider_class/userprovider.dart';
-import 'package:moofli_fullstack/services/auth_service.dart';
+// import 'package:moofli_fullstack/services/auth_service.dart';
 import 'package:moofli_fullstack/utils/sidebar.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';

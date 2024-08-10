@@ -5,12 +5,12 @@ import 'package:moofli_fullstack/models/user.dart';
 
 class UserProvider extends ChangeNotifier {
   User _user = User(
-    id: '',
-    name: '',
+    // id: '',
+    // name: '',
     email: '',
     password: '',
-    address: '',
-    type: '',
+    // address: '',
+    // type: '',
     token: '',
     // cart: [],
   );

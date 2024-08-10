@@ -36,7 +36,7 @@ class _home_pageState extends State<home_page> {
     super.initState();
     _selectedDay = DateTime.now();
     _focusedDay = DateTime.now();
-    _fetchPosts();
+    // _fetchPosts();
   }
 
   // Future<void> _fetchPosts() async {
@@ -82,9 +82,9 @@ class _home_pageState extends State<home_page> {
       });
     });
   }
-   void _fetchPosts() async {
-    await AuthService().fetchDiaryEntries(context);
-  }
+  //  void _fetchPosts() async {
+  //   await AuthService().fetchDiaryEntries(context);
+  // }
 
   void _updateFocusedDay(DateTime focusedDay) {
     WidgetsBinding.instance.addPostFrameCallback((_) {

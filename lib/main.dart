@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       home: Consumer<UserProvider>(
         builder: (context, userProvider, _) {
           if (userProvider.user.token.isNotEmpty) {
-            if (userProvider.user.type == 'user') {
+            if (userProvider.user.token == '') {
               return  Diaryentry(); // Ensure DiaryEntry uses Scaffold
             } else {
               return const home_page(); // Ensure HomePage uses Scaffold

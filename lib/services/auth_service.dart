@@ -30,7 +30,7 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      // print(res.body);
+      print(res.body);
       httpErrorHandle(
         response: res,
         context: context,
@@ -43,6 +43,7 @@ class AuthService {
             home_page.routeName,
             (route) => false,
           );
+          showSuccessMessage(context, message: 'success');
         },
       );
     } catch (e) {
@@ -51,43 +52,43 @@ class AuthService {
   }
 
   // get user data
-  // void getUserData(
-  //   BuildContext context,
-  // ) async {
-  //   try {
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
-  //     String? token = prefs.getString('x-auth-token');
+  void getUserData(
+    BuildContext context,
+  ) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('x-auth-token');
 
-  //     if (token == null) {
-  //       prefs.setString('x-auth-token', '');
-  //     }
+      if (token == null) {
+        prefs.setString('x-auth-token', '');
+      }
 
-  //     var tokenRes = await http.post(
-  //       Uri.parse('$uri/user-tokenIsValid/'),
-  //       headers: <String, String>{
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //         'x-auth-token': token!
-  //       },
-  //     );
+      var tokenRes = await http.post(
+        Uri.parse('$uri/user-tokenIsValid/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': token!
+        },
+      );
 
-  //     var response = jsonDecode(tokenRes.body);
+      var response = jsonDecode(tokenRes.body);
 
-  //     if (response == true) {
-  //       http.Response userRes = await http.get(
-  //         Uri.parse('$uri/'),
-  //         headers: <String, String>{
-  //           'Content-Type': 'application/json; charset=UTF-8',
-  //           'x-auth-token': token
-  //         },
-  //       );
+      if (response == true) {
+        http.Response userRes = await http.get(
+          Uri.parse('$uri/'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': token
+          },
+        );
 
-  //       var userProvider = Provider.of<UserProvider>(context, listen: false);
-  //       userProvider.setUser(userRes.body);
-  //     }
-  //   } catch (e) {
-  //     showErrorMessage(context, message: e.toString());
-  //   }
-  // }
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userRes.body);
+      }
+    } catch (e) {
+      showErrorMessage(context, message: e.toString());
+    }
+  }
 
    Future<void> fetchDiaryEntries(BuildContext context) async {
     try {

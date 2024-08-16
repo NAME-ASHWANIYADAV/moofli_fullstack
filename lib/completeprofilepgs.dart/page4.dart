@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:moofli_fullstack/completeprofilepgs.dart/page5.dart';
 
 class ProfessionalInformationPage4 extends StatefulWidget {
   @override
@@ -25,7 +24,8 @@ class _ProfessionalInformationPage4State
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/logo.png', height: 50), // Placeholder for your logo
+                  Image.asset('images/moofli_logo.jpg',
+                      height: 50), // Placeholder for your logo
                 ],
               ),
               SizedBox(height: 20.0),
@@ -106,6 +106,8 @@ class _ProfessionalInformationPage4State
                       setState(() {
                         progress = 0.8; // Update progress for the next page
                       });
+                      Navigator.push(context,  MaterialPageRoute(
+                        builder: (context) => CoverProfilePhotoPage()));
                       // Implement navigation to the next page
                     },
                     style: ElevatedButton.styleFrom(

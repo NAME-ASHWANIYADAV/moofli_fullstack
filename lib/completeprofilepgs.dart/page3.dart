@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page4.dart';
 
 class ProfileCompletionPage3 extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class ProfileCompletionPage3State extends State<ProfileCompletionPage3> {
                         Navigator.of(context).pop(); // Close the dialog
                       },
                       style: ElevatedButton.styleFrom(
-                       foregroundColor: Colors.orangeAccent,
+                        foregroundColor: Colors.orangeAccent,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
@@ -97,7 +98,8 @@ class ProfileCompletionPage3State extends State<ProfileCompletionPage3> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/logo.png', height: 50), // Placeholder for your logo
+                Image.asset('images/moofli_logo.jpg',
+                    height: 50), // Placeholder for your logo
               ],
             ),
             SizedBox(height: 20.0),
@@ -162,6 +164,11 @@ class ProfileCompletionPage3State extends State<ProfileCompletionPage3> {
                     setState(() {
                       progress = 0.6; // Update progress for the next page
                     });
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProfessionalInformationPage4()));
                     // Implement navigation to the next page
                   },
                   style: ElevatedButton.styleFrom(
@@ -169,7 +176,8 @@ class ProfileCompletionPage3State extends State<ProfileCompletionPage3> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
                   ),
                   child: Row(
                     children: [

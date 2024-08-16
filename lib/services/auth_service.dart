@@ -90,40 +90,40 @@ class AuthService {
     }
   }
 
-   Future<void> fetchDiaryEntries(BuildContext context) async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('x-auth-token');
-      if (token == null) {
-        throw "Token is null";
-      }
+  //  Future<void> fetchDiaryEntries(BuildContext context) async {
+  //   try {
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     String? token = prefs.getString('x-auth-token');
+  //     if (token == null) {
+  //       throw "Token is null";
+  //     }
 
-      String userId = Provider.of<UserProvider>(context, listen: false).user.id;
-      print('Fetching diary entries for user: $userId');
+  //     // String userId = Provider.of<UserProvider>(context, listen: false).user.id;
+  //     print('Fetching diary entries for user: $userId');
 
-      final response = await http.get(
-        Uri.parse('$uri/diary/entries/user/$userId'),
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth-token': token,
-        },
-      );
+  //     final response = await http.get(
+  //       Uri.parse('$uri/diary/entries/user/$userId'),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'x-auth-token': token,
+  //       },
+  //     );
 
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+  //     print('Response status: ${response.statusCode}');
+  //     print('Response body: ${response.body}');
 
-      if (response.statusCode == 200) {
-        List<dynamic> body = jsonDecode(response.body);
-        List<Post> posts =
-            body.map((dynamic item) => Post.fromJson(item)).toList();
-        Provider.of<UserProvider>(context, listen: false)
-            .setDiaryEntries(posts);
-      } else {
-        throw "Failed to load diary entries: ${response.statusCode} ${response.reasonPhrase}";
-      }
-    } catch (e) {
-      print('Error fetching diary entries: $e');
-      showErrorMessage(context, message: e.toString());
-    }
-  }
+  //     if (response.statusCode == 200) {
+  //       List<dynamic> body = jsonDecode(response.body);
+  //       List<Post> posts =
+  //           body.map((dynamic item) => Post.fromJson(item)).toList();
+  //       Provider.of<UserProvider>(context, listen: false)
+  //           .setDiaryEntries(posts);
+  //     } else {
+  //       throw "Failed to load diary entries: ${response.statusCode} ${response.reasonPhrase}";
+  //     }
+  //   } catch (e) {
+  //     print('Error fetching diary entries: $e');
+  //     showErrorMessage(context, message: e.toString());
+  //   }
+  // }
 }

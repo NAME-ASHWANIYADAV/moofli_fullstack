@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page3.dart';
 
 class ContactInformationScreen extends StatelessWidget {
   final double progress;
@@ -14,10 +15,10 @@ class ContactInformationScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Logo
-            Image.network(
-              'https://yourlogo.url', // Replace with your logo URL
-              height: 100.0,
-            ),
+            // Image.network(
+            //   'https://yourlogo.url', // Replace with your logo URL
+            //   height: 100.0,
+            // ),
             SizedBox(height: 20.0),
             // Complete your Profile Text
             RichText(
@@ -129,6 +130,10 @@ class ContactInformationScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileCompletionPage3()));
                     // Logic for completing profile can go here
                   },
                   style: ElevatedButton.styleFrom(
@@ -136,7 +141,8 @@ class ContactInformationScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
                   ),
                   child: Row(
                     children: [

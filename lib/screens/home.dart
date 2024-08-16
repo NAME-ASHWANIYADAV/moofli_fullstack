@@ -6,6 +6,8 @@ import 'package:moofli_fullstack/models/user.dart';
 // import 'package:moofli_fullstack/constants/global_variables.dart';
 import 'package:moofli_fullstack/screens/diary_entry.dart';
 import 'package:moofli_fullstack/provider_class/userprovider.dart';
+import 'package:moofli_fullstack/utils/appbar.dart';
+
 // import 'package:moofli_fullstack/services/auth_service.dart';
 import 'package:moofli_fullstack/utils/sidebar.dart';
 import 'package:provider/provider.dart';
@@ -99,58 +101,59 @@ class _home_pageState extends State<home_page> {
     // Sort posts by date in descending order
      List<Post> posts = Provider.of<UserProvider>(context).diaryEntries;
     posts.sort((a, b) => b.date.compareTo(a.date));
-    int postCount = posts.length;
+    // int postCount = posts.length;
 
     return Scaffold(
-       drawer: Sidebar(),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: Builder(
-            builder: (context) {
-              return IconButton(
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                  icon: Icon(
-                    Icons.circle,
-                    size: 40,
-                  ));
-            },
-          ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // IconButton(
-              // icon: CircleAvatar(
-              //   radius: 15, // Adjust the radius to fit your design
-              //   backgroundImage: AssetImage(
-              //       'images/croc2.jpeg'), // Path to your profile image
-              // ),
-            //   onPressed: () => Scaffold.of(context).openDrawer(),
-            // ),
-            SizedBox(width: 20),
-            Row(
-              children: [
-                Image.asset('images/moofli_logo.jpg',
-                    height: 24), // Change this to your logo
-                SizedBox(width: 8),
-                Text('MOOFLI'),
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.local_fire_department,
-                  // color: newPost ? Colors.red : Colors.black,
-                ),
-                SizedBox(width: 4),
-                 Text('$postCount'),
-              ],
-            ),
-          ],
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
+        drawer: Sidebar(),
+       appBar : Appbar_screen(),
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   leading: Builder(
+      //       builder: (context) {
+      //         return IconButton(
+      //             onPressed: () => Scaffold.of(context).openDrawer(),
+      //             icon: Icon(
+      //               Icons.circle,
+      //               size: 40,
+      //             ));
+      //       },
+      //     ),
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       // IconButton(
+      //         // icon: CircleAvatar(
+      //         //   radius: 15, // Adjust the radius to fit your design
+      //         //   backgroundImage: AssetImage(
+      //         //       'images/croc2.jpeg'), // Path to your profile image
+      //         // ),
+      //       //   onPressed: () => Scaffold.of(context).openDrawer(),
+      //       // ),
+      //       SizedBox(width: 20),
+      //       Row(
+      //         children: [
+      //           Image.asset('images/moofli_logo.jpg',
+      //               height: 24), // Change this to your logo
+      //           SizedBox(width: 8),
+      //           Text('MOOFLI'),
+      //         ],
+      //       ),
+      //       Row(
+      //         children: [
+      //           Icon(
+      //             Icons.local_fire_department,
+      //             // color: newPost ? Colors.red : Colors.black,
+      //           ),
+      //           SizedBox(width: 4),
+      //            Text('$postCount'),
+      //         ],
+      //       ),
+      //     ],
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   elevation: 0,
+      //   iconTheme: IconThemeData(color: Colors.black),
+      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

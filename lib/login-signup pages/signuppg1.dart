@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page1.dart';
 
 
 class Signuppg1 extends StatefulWidget {
@@ -81,7 +82,9 @@ class _Signuppg1State extends State<Signuppg1> {
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileCompletionScreen()));
+                    },
                     child: Text('Sign Up')
                     ),
                 )

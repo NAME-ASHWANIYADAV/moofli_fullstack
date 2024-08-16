@@ -46,26 +46,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(),
         useMaterial3: true,
       ),
-      // home: home_page(),
-      onGenerateRoute: (settings) => generateRoute(settings),
-      home: Consumer<UserProvider>(
-        builder: (context, userProvider, _) {
-          if (userProvider.user.token.isNotEmpty) {
-<<<<<<< HEAD
-            if (userProvider.user.token == '') {
-              return  Diaryentry(); // Ensure DiaryEntry uses Scaffold
-=======
-            if (userProvider.user.type == 'user') {
-              return Diaryentry(); // Ensure DiaryEntry uses Scaffold
->>>>>>> ab14866567c63422af1a62e491981b3296fc4847
-            } else {
-              return const home_page(); // Ensure HomePage uses Scaffold
-            }
-          } else {
-            return const landingPage(); // Ensure LandingPage uses Scaffold
-          }
-        },
-      ),
+       home: landingPage(),
+      // onGenerateRoute: (settings) => generateRoute(settings),
+      // home: Consumer<UserProvider>(
+      //   builder: (context, userProvider, _) {
+      //     if (userProvider.user.token.isNotEmpty) {
+      //       if (userProvider.user.type == 'user') {
+      //         return Diaryentry(); // Ensure DiaryEntry uses Scaffold
+      //       } else {
+      //         return const home_page(); // Ensure HomePage uses Scaffold
+      //       }
+      //     } else {
+      //       return const landingPage(); // Ensure LandingPage uses Scaffold
+      //     }
+      //   },
+      // ),
     );
   }
 }

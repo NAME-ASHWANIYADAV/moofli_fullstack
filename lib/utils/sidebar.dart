@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/screens/profile.dart';
 import 'package:moofli_fullstack/screens/settings.dart';
 
 class Sidebar extends StatelessWidget {
@@ -26,6 +27,10 @@ class Sidebar extends StatelessWidget {
                     leading: Icon(Icons.person),
                     title: Text('Profile'),
                     onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()));
                       // Handle Profile tap
                     },
                   ),
@@ -48,7 +53,6 @@ class Sidebar extends StatelessWidget {
               title:
                   Text('Logout Account', style: TextStyle(color: Colors.red)),
               onTap: () {
-                
                 // Handle Logout tap
               },
             ),

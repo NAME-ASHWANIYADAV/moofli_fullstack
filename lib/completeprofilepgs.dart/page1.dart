@@ -27,11 +27,11 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo
-            Image.network(
-              'https://yourlogo.url', // Replace with your logo URL
-              height: 100.0,
-            ),
+            // // Logo
+            // Image.network(
+            //   'https://yourlogo.url', // Replace with your logo URL
+            //   height: 100.0,
+            // ),
             SizedBox(height: 20.0),
             // Complete your Profile Text
             RichText(
@@ -176,13 +176,13 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // _incrementProgress();
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => ContactInformationScreen(progress: progress),
-                    //   ),
-                    // );
+                    _incrementProgress();
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(
+                         builder: (context) => ContactInformationScreen(progress: progress),
+                     ),
+                   );
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
@@ -191,6 +191,7 @@ class _ProfileCompletionScreenState extends State<ProfileCompletionScreen> {
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
                   ),
+                  
                   child: Row(
                     children: [
                       Text('NEXT'),

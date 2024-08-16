@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/completeprofilepgs.dart/page6.dart';
 
 
 
@@ -22,7 +23,7 @@ class CoverProfilePhotoPageState extends State<CoverProfilePhotoPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/logo.png', height: 50), // Placeholder for your logo
+                Image.asset('images/moofli_logo.jpg', height: 50), // Placeholder for your logo
               ],
             ),
             SizedBox(height: 20.0),
@@ -128,6 +129,8 @@ class CoverProfilePhotoPageState extends State<CoverProfilePhotoPage> {
                       progress = 1.0; // Update progress for the next page
                     });
                     // Implement navigation to the next page
+                     Navigator.push(context,  MaterialPageRoute(
+                        builder: (context) => ProfileCompletionScreen6()));
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,

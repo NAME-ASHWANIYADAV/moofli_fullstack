@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moofli_fullstack/screens/home.dart';
 
 
 
@@ -20,7 +21,7 @@ class _ProfileCompletionScreen6State extends State<ProfileCompletionScreen6> {
             Spacer(),
             Center(
               child: Image.asset(
-                'assets/moofli_logo.png', // replace with your logo asset path
+                'images/moofli_logo.jpg', // replace with your logo asset path
                 height: 50,
               ),
             ),
@@ -68,6 +69,8 @@ class _ProfileCompletionScreen6State extends State<ProfileCompletionScreen6> {
             SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
+                 Navigator.push(context,  MaterialPageRoute(
+                        builder: (context) => home_page()));
                 // Action on Finish button pressed
               },
               child: Text('FINISH'),
@@ -86,6 +89,7 @@ class _ProfileCompletionScreen6State extends State<ProfileCompletionScreen6> {
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
                   // Action on back button pressed
+                  
                 },
               ),
             ),

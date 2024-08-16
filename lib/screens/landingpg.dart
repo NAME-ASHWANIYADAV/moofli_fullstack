@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moofli_fullstack/login-signup%20pages/loginpg.dart';
+import 'package:moofli_fullstack/login-signup%20pages/signuppg1.dart';
 
 
 class landingPage extends StatefulWidget {
@@ -186,7 +187,7 @@ class _landingPageState extends State<landingPage> {
                     )),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()));
+                          MaterialPageRoute(builder: (context) => Signuppg1()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -194,7 +195,9 @@ class _landingPageState extends State<landingPage> {
                       child: Text(
                         "Sign Up",
                         style: TextStyle(color: Colors.black),
+                        
                       ),
+                      
                     ),
                   ),
                 )

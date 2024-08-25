@@ -22,7 +22,7 @@ class CustomTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
-      ),
+      ),             
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter $hint';

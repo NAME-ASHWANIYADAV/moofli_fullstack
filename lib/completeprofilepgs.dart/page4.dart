@@ -21,37 +21,110 @@ class _ProfessionalInformationPage4State
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('images/moofli_logo.jpg',
-                      height: 50), // Placeholder for your logo
-                ],
-              ),
-              SizedBox(height: 20.0),
-              Text(
-                "Complete your",
-                style: TextStyle(fontSize: 24.0),
-              ),
-              Text(
-                "Profile",
-                style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 10.0),
-              // Progress Bar
-              Row(
-                children: [
-                  Expanded(
-                    child: LinearProgressIndicator(
-                      value: progress,
-                      backgroundColor: Colors.grey[300],
-                      color: Colors.redAccent,
+              const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'images/skillop_logo_nobg.png',
+                      height: 46,
+                      width: 46,
                     ),
-                  ),
-                  SizedBox(width: 10.0),
-                  Text("${(progress * 100).toInt()}% there"),
-                ],
-              ),
+                    const Text(
+                      "MOOFLI",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 35),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Complete your",
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                    ),
+                    const Text(
+                      "Profile",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 40,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 190,
+                          height: 3,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFF108CFF),
+                                Color(0xFF0EAB00),
+                                Color(0xFFFFB800),
+                                Color(0xFFFD0C0C)
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 160,
+                          height: 3,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFD9D9ED),
+                                Color(0xFFD9D9ED),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "You are",
+                      style: TextStyle(color: Color.fromARGB(255, 95, 95, 95)),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      "60%",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 95, 95, 95),
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      "there",
+                      style: TextStyle(color: Color.fromARGB(255, 95, 95, 95)),
+                    ),
+                  ],
+                ),
+              // Progress Bar
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: LinearProgressIndicator(
+              //         value: progress,
+              //         backgroundColor: Colors.grey[300],
+              //         color: Colors.redAccent,
+              //       ),
+              //     ),
+              //     SizedBox(width: 10.0),
+              //     Text("${(progress * 100).toInt()}% there"),
+              //   ],
+              // ),
               SizedBox(height: 20.0),
               // Professional Information Section
               Text(
@@ -101,31 +174,46 @@ class _ProfessionalInformationPage4State
                     },
                     icon: Icon(Icons.arrow_back),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        progress = 0.8; // Update progress for the next page
-                      });
-                      Navigator.push(context,  MaterialPageRoute(
-                        builder: (context) => CoverProfilePhotoPage()));
-                      // Implement navigation to the next page
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       progress = 0.8; // Update progress for the next page
+                  //     });
+                  //     Navigator.push(context,  MaterialPageRoute(
+                  //       builder: (context) => CoverProfilePhotoPage()));
+                  //     // Implement navigation to the next page
+                  //   },
+                  //   style: ElevatedButton.styleFrom(
+                  //     foregroundColor: Colors.black,
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(30.0),
+                  //     ),
+                  //     padding: EdgeInsets.symmetric(
+                  //         horizontal: 30.0, vertical: 15.0),
+                  //   ),
+                    SizedBox(
+                      height: 41,
+                      width: 89,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CoverProfilePhotoPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            padding: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100))),
+                        child: Image.asset(
+                          'images/next.png',
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 15.0),
                     ),
-                    child: Row(
-                      children: [
-                        Text('NEXT'),
-                        SizedBox(width: 5.0),
-                        Icon(Icons.arrow_forward),
-                      ],
-                    ),
-                  ),
+                  // ),
                 ],
               ),
             ],

@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.light(),
         useMaterial3: true,
       ),
-       home: landingPage(),
+       home: ProfileCompletionScreen(),
       // onGenerateRoute: (settings) => generateRoute(settings),
       // home: Consumer<UserProvider>(
       //   builder: (context, userProvider, _) {
